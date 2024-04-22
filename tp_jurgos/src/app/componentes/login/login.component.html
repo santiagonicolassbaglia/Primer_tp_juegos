@@ -1,0 +1,30 @@
+<main class="form-signin">
+  <form (ngSubmit)="login()">
+    <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal">Por favor, ingrese su usuario y contraseña</h1>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="nombre" placeholder="Nombre de usuario" [(ngModel)]="nombre" name="nombre">
+      <label for="nombre">Nombre de usuario</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="clave" placeholder="Contraseña" [(ngModel)]="clave" name="clave">
+      <label for="clave">Contraseña</label>
+    </div>
+
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me" name="recordarme"> Recordarme
+      </label>
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Iniciar sesión</button>
+  </form>
+
+  <div *ngIf="resultado; else errorTemplate">
+    <app-home></app-home>
+  </div>
+  <ng-template #errorTemplate>
+    <app-pagina-error></app-pagina-error>
+  </ng-template>
+</main>
