@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Usuario } from '../../clases/usuario';
 import { FormsModule } from '@angular/forms';
 import { PaginaErrorComponent } from '../pagina-error/pagina-error.component';
@@ -28,5 +28,12 @@ resultado: boolean = false;
     } else {
       this.resultado = false;
     }
+  }
+
+  @Input() usuarioNombreInput: string | undefined = this.nombre;
+  @Output() agregarEvent = new EventEmitter<Usuario>();
+
+  agregarUsuario() {
+    this.agregarEvent.emit(new Usuario(this.nombre, this.clave));
   }
 }

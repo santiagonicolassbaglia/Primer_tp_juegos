@@ -51,4 +51,9 @@ body {
           font-size: 3.5rem;
         }
       }
- 
+      .form-signin {
+   
+        background-image: url('../../../assets/imagenes/controller-clipart-game-design-1.jpg');
+        background-size: cover; 
+        background-repeat: no-repeat; 
+      }
