@@ -13,5 +13,5 @@ import { PresentacionComponent } from './presentacion/presentacion.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'tp_jurgos';
+  title = 'tp-juegos';
 }
