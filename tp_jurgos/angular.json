@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "tp_jurgos": {
+    "tp-juegos": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/tp_jurgos",
+            "outputPath": "dist/tp-juegos",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -57,10 +57,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "tp_jurgos:build:production"
+              "buildTarget": "tp-juegos:build:production"
             },
             "development": {
-              "buildTarget": "tp_jurgos:build:development"
+              "buildTarget": "tp-juegos:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -68,7 +68,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "tp_jurgos:build"
+            "buildTarget": "tp-juegos:build"
           }
         },
         "test": {
@@ -88,6 +88,23 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "tp-juegos:build:production",
+              "serveTarget": "tp-juegos:serve:production"
+            },
+            "development": {
+              "buildTarget": "tp-juegos:build:development",
+              "serveTarget": "tp-juegos:serve:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

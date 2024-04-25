@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "tp-juegos-nuevo": {
+      "hosting": {
+        "tp-juegos": [
+          "tp-juegos-nuevo"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "tp-juegos-nuevo"
+  }
+}
