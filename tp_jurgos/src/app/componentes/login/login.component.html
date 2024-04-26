@@ -4,12 +4,12 @@
     <h1 class="h3 mb-3 fw-normal">Ingresar</h1>
 
     <div class="form-floating">
-      <input type="text" class="form-control" id="nombre" placeholder="Nombre de usuario" [(ngModel)]="nombre" name="nombre">
-      <label for="nombre">Nombre de usuario</label>
+      <input type="email" class="form-control" id="email" placeholder="email" [(ngModel)]="email" name="email">
+      <label for="email">Email</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="clave" placeholder="Contraseña" [(ngModel)]="clave" name="clave">
-      <label for="clave">Contraseña</label>
+      <input type="password" class="form-control" id="claveLogin" placeholder="Contraseña" [(ngModel)]="clave" name="clave">
+      <label for="claveLogin">Contraseña</label>
     </div>
 
     <div class="checkbox mb-3">
@@ -17,12 +17,35 @@
         <input type="checkbox" value="remember-me" name="recordarme"> Recordarme
       </label>
     </div>
-
+    <div *ngIf="mensajeError" class="error">{{ mensajeError }}</div>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Iniciar sesión</button>
+
+    <button class="w-100 btn btn-lg btn-primary" type="button" (click)="registro = !registro">
+      {{ registro ? 'Cancelar Registro' : 'Registrarse' }}
+    </button>
+
+    <div *ngIf="registro">
+
+      <div class="form-floating">
+        <input type="text" class="form-control" id="nombreRegistro" placeholder="Nombre" [(ngModel)]="nombre" name="nombreRegistro">
+        <label for="nombreRegistro">Nombre</label>
+      </div>
+      <div class="form-floating">
+        <input type="email" class="form-control" id="emailRegistro" placeholder="Mail" [(ngModel)]="email" name="emailRegistro">
+        <label for="emailRegistro">Email</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="claveRegistro" placeholder="Contraseña" [(ngModel)]="clave" name="claveRegistro">
+        <label for="claveRegistro">Contraseña</label>
+      </div>
+
+      <button class="w-100 btn btn-lg btn-primary" type="button" (click)="agregarUsuario()">Registrarse</button>
+    </div>
+
+    <p>Estado del registro: {{ registro }}</p>
   </form>
 
-  <div *ngIf="resultado; ">
+  <div *ngIf="resultado">
     <app-home></app-home>
   </div>
-  
 </main>

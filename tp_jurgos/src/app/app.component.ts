@@ -4,7 +4,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { HomeComponent } from './componentes/home/home.component';
 import { PaginaErrorComponent } from '../app/componentes/pagina-error/pagina-error.component';
 import { LoginComponent } from '../app/componentes/login/login.component';
-import { PresentacionComponent } from './presentacion/presentacion.component';
+import { PresentacionComponent } from './componentes/presentacion/presentacion.component';
 @Component({
   selector: 'app-root',
   standalone: true,
