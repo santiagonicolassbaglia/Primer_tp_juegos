@@ -4,12 +4,12 @@ import { Usuario } from '../../clases/usuario';
 import { FormsModule } from '@angular/forms';
 import { PaginaErrorComponent } from '../pagina-error/pagina-error.component';
 import { NgIf } from '@angular/common';
-import { HomeComponent } from '../home/home.component';
+ 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, HomeComponent, PaginaErrorComponent, NgIf],
+  imports: [FormsModule   , PaginaErrorComponent, NgIf],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

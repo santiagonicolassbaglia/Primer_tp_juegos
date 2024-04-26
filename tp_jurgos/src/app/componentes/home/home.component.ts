@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -8,8 +8,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-
-  logged = false;
-
 
 }
