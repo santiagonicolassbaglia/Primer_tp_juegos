@@ -4,6 +4,7 @@ import { Usuario } from '../../clases/usuario';
 import { FormsModule } from '@angular/forms';
 import { PaginaErrorComponent } from '../pagina-error/pagina-error.component';
 import { NgIf } from '@angular/common';
+
  
 
 @Component({
@@ -27,15 +28,16 @@ export class LoginComponent {
     const usuario = new Usuario(this.nombre, this.email, this.clave);
   }
   login() {
+    console.log("Email:", this.email, "Clave:", this.clave);
     if (this.email === 'santi' && this.clave === '123') {
       this.resultado = true;
- 
-      this.router.navigateByUrl('/componente/home');
+      this.router.navigateByUrl('home');
     } else {
       this.resultado = false;
       this.mensajeError = 'El correo electrónico o la contraseña son incorrectos';
     }
   }
+  
 
   agregarUsuario() {
     this.agregarEvent.emit(new Usuario(this.nombre, this.email, this.clave));
