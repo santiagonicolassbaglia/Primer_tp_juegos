@@ -1,10 +1,10 @@
 .form-signin {
-  width: 100vw; /* Ancho igual al ancho de la ventana */
+  width: 100%; /* Ancho igual al ancho de la ventana */
   height: 100vh; /* Altura igual a la altura de la ventana */
   padding: 0px;
-  background-image: url("../../../assets/imagenes/login3");
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-image: url("../../../assets/imagenes/utnGames1.jpg");
+  background-size: cover ;
+  background-repeat:initial;
   background-attachment: fixed;
   background-position: center;
   display: flex;

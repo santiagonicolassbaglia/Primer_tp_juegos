@@ -1,10 +1,10 @@
 <main class="form-signin">
   <form (ngSubmit)="login()">
-    <img class="mb-4" src="../../../assets/imagenes/imagenLogin.jpeg" alt="" width="72" height="57">
+    <img class="mb-4" src="../../../assets/imagenes/utn.png" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">Ingresar</h1>
 
     <div class="form-floating">
-      <input type="email" class="form-control" id="email" placeholder="email" [(ngModel)]="email" name="email">
+      <input type="email" class="form-control" id="email" placeholder="Email" [(ngModel)]="email" name="email">
       <label for="email">Email</label>
     </div>
     <div class="form-floating">
@@ -45,6 +45,6 @@
   </form>
 
   <div *ngIf="resultado">
-    <!-- Puedes agregar contenido aquí para mostrar después del inicio de sesión -->
+ 
   </div>
 </main>
