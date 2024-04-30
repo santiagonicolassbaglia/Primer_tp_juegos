@@ -1,12 +1,13 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { Router } from '@angular/router'; // Importa Router
 import { Usuario } from '../../clases/usuario';
 import { FormsModule } from '@angular/forms';
 import { PaginaErrorComponent } from '../pagina-error/pagina-error.component';
 import { NgIf } from '@angular/common';
+ 
+import { AuthService } from '../../services/auth.service';
 
  
-
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -21,12 +22,24 @@ export class LoginComponent {
   resultado: boolean = false;
   registro = false;
   mensajeError: string = '';
+
+private loginAuth = inject(AuthService);
   // Inyecta el enrutador en el constructor
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authS: AuthService){ 
+    authS.register('santi', '1234567').then((user) => {
+      console.log('Usuario registrado', user);
+    }).catch((error) => {
+      console.log('Error al registrar usuario', error);
+    });
+      
+  } 
+
 
   submitForm() {
     const usuario = new Usuario(this.nombre, this.email, this.clave);
   }
+
+
   login() {
     console.log("Email:", this.email, "Clave:", this.clave);
     if (this.email === 'santi' && this.clave === '123') {
@@ -42,8 +55,7 @@ export class LoginComponent {
   agregarUsuario() {
     this.agregarEvent.emit(new Usuario(this.nombre, this.email, this.clave));
  
-  }
-
+  } 
 
   @Input() usuarioNombreInput: string | undefined = this.nombre;
   @Output() agregarEvent = new EventEmitter
