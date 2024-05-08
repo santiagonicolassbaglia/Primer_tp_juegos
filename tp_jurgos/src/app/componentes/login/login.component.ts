@@ -18,7 +18,7 @@ import { Observable } from 'rxjs';
 })
 export class LoginComponent implements OnInit{
   nombre: string = '';
-  email: string = '';
+  mail: string = '';
   clave: string = '';
   resultado: boolean = false;
   registro = false;
@@ -26,9 +26,10 @@ export class LoginComponent implements OnInit{
   private items$: Observable<Usuario[]>;
 
  
-   
-  constructor(private router: Router, private authService: AuthService) {
-
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {
     
    } 
 
@@ -40,15 +41,12 @@ export class LoginComponent implements OnInit{
       this.items$ = this.authService.getAll();
     }
 
-
-  submitForm() {
-    const usuario = new Usuario(this.nombre, this.email, this.clave, '');
-  }
+ 
 
 
   async login() {
     try {
-      await this.authService.login(this.email, this.clave);
+      await this.authService.login(this.mail, this.clave);
       this.router.navigateByUrl('home');
     } catch (error) {
       console.log('Error de inicio de sesión:', error);
@@ -56,30 +54,37 @@ export class LoginComponent implements OnInit{
     }
   }
   
+  submitForm() {
+    const usuario = new Usuario(this.nombre, this.mail, this.clave, '');
+    this.authService.registrar(usuario);
+  }
 
   async agregarUsuario() {
-    console.log('Método agregarUsuario() llamado');
+    if (!this.mail || !this.clave || !this.nombre) {
+      this.mensajeError = 'Por favor, completa todos los campos.';
+      return;
+    }
+  
     try {
-      const usuario = new Usuario(this.nombre, this.email, this.clave, '');
-      await this.authService.registrar(usuario);
   
-      // Cerrar las opciones de registro
-      this.registro = false;
+      const nuevoUsuario = new Usuario(this.nombre, this.mail, this.clave, '');
   
-      // Limpiar los campos del formulario
+      await this.authService.registrar(nuevoUsuario);
+  
+      this.router.navigateByUrl('/ruta-de-inicio');
+
       this.nombre = '';
-      this.email = '';
+      this.mail = '';
       this.clave = '';
-  
-      console.log('Usuario registrado:', usuario);
-      console.log('Usuario registrado correctamente');
+      this.mensajeError = '';
     } catch (error) {
+     
+      this.mensajeError = 'Hubo un problema al registrar el usuario. Inténtalo de nuevo.';
       console.error('Error al registrar usuario:', error);
-      // Manejo de errores de registro
     }
   }
   
-
+   
   @Input() usuarioNombreInput: string | undefined = this.nombre;
   @Output() agregarEvent = new EventEmitter
 
