@@ -8,7 +8,7 @@ import { GithubService } from '../../services/github.service';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [RouterLink, RouterOutlet,FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit{
   
       await this.authService.registrar(nuevoUsuario);
   
-      this.router.navigateByUrl('/ruta-de-inicio');
+      this.router.navigateByUrl('/home');
 
       this.nombre = '';
       this.mail = '';
@@ -83,7 +83,15 @@ export class LoginComponent implements OnInit{
       console.error('Error al registrar usuario:', error);
     }
   }
+
+  usuarioPorDefecto()
+  {
+    this.nombre = 'Usuario';
+    this.mail = 'santiii@gmail.com';
+    this.clave = '123456';
+  }
   
+ 
    
   @Input() usuarioNombreInput: string | undefined = this.nombre;
   @Output() agregarEvent = new EventEmitter

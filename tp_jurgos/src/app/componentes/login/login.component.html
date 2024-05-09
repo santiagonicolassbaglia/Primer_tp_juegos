@@ -11,7 +11,11 @@
       <input type="password" class="form-control" id="claveLogin" placeholder="Contraseña" [(ngModel)]="clave" name="clave">
       <label for="claveLogin">Contraseña</label>
     </div>
-
+    <div>
+      <button class="w-100 btn btn-lg btn-primary" type="button" (click)="usuarioPorDefecto()">Usuario por defecto</button>
+     </div>
+  
+       
     <div class="checkbox mb-3">
       <label>
         <input type="checkbox" value="remember-me" name="recordarme"> Recordarme
@@ -39,6 +43,9 @@
       </div>
 
       <button class="w-100 btn btn-lg btn-primary" type="button" (click)="agregarUsuario()">Registrarse</button>
+
+    
+     
 
     </div>
 
