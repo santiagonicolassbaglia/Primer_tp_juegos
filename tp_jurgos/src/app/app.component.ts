@@ -7,6 +7,7 @@ import { LoginComponent } from '../app/componentes/login/login.component';
 import { PresentacionComponent } from './componentes/presentacion/presentacion.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { JuegoAhorcadoComponent } from './componentes/juego-ahorcado/juego-ahorcado.component';
+import { MayorMenorComponent } from './componentes/mayor-menor/mayor-menor.component';
  
 
 
@@ -17,7 +18,7 @@ import { JuegoAhorcadoComponent } from './componentes/juego-ahorcado/juego-ahorc
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,FormsModule,RouterLink, LoginComponent ,PaginaErrorComponent, PresentacionComponent,HomeComponent ,  AppComponent, JuegoAhorcadoComponent],
+  imports: [RouterOutlet,FormsModule,RouterLink, LoginComponent ,PaginaErrorComponent, PresentacionComponent,HomeComponent ,  AppComponent, JuegoAhorcadoComponent, MayorMenorComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
