@@ -9,7 +9,7 @@ export const routes: Routes = [
     {path: 'presentacion', loadComponent: () => import('./componentes/presentacion/presentacion.component').then(m => m.PresentacionComponent)},
     {path: 'home', loadComponent: () => import('./componentes/home/home.component').then(m => m.HomeComponent)},
       
- 
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
 
         {  path: '**', redirectTo: 'PaginaErrorComponent' }
         

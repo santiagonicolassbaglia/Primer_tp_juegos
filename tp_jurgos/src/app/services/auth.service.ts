@@ -64,12 +64,12 @@ async registrar(objeto: Usuario) {
     // @ts-ignore
     const userCredential: UserCredential = await this.auth.createUserWithEmailAndPassword(objeto.mail, objeto.contraseña);
     const uid = userCredential.user.uid;
-    // Guardar datos adicionales del usuario en Firestore
+ 
     await this.guardarUsuarioFirestore(uid, objeto.nombre, objeto.mail);
     console.log('Usuario registrado correctamente');
   } catch (error) {
     console.error('Error al registrar usuario en Firebase:', error);
-    throw error; // Lanzar el error para manejarlo en el componente
+    throw error;  
   }
 }
 
