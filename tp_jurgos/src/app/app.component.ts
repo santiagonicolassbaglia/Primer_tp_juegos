@@ -6,11 +6,18 @@ import { PaginaErrorComponent } from '../app/componentes/pagina-error/pagina-err
 import { LoginComponent } from '../app/componentes/login/login.component';
 import { PresentacionComponent } from './componentes/presentacion/presentacion.component';
 import { HomeComponent } from './componentes/home/home.component';
+import { JuegoAhorcadoComponent } from './componentes/juego-ahorcado/juego-ahorcado.component';
+ 
+
+
+
+
+
  
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,FormsModule,RouterLink, LoginComponent,PaginaErrorComponent, PresentacionComponent,HomeComponent],
+  imports: [RouterOutlet,FormsModule,RouterLink, LoginComponent ,PaginaErrorComponent, PresentacionComponent,HomeComponent ,  AppComponent, JuegoAhorcadoComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
