@@ -39,7 +39,7 @@ export class MayorMenorComponent implements OnInit{
   }
 
   verificarResultado(eleccion: string) {
-    this.generarCarta(); // Asegúrate de que las cartas cambien en cada verificación
+    this.generarCarta();
 
     if (
       (eleccion === 'mayor' && this.cartaActual > this.cartaAnterior) ||

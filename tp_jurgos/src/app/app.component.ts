@@ -8,6 +8,7 @@ import { PresentacionComponent } from './componentes/presentacion/presentacion.c
 import { HomeComponent } from './componentes/home/home.component';
 import { JuegoAhorcadoComponent } from './componentes/juego-ahorcado/juego-ahorcado.component';
 import { MayorMenorComponent } from './componentes/mayor-menor/mayor-menor.component';
+import { RegistroComponent } from './componentes/registro/registro.component';
  
 
 
@@ -18,7 +19,7 @@ import { MayorMenorComponent } from './componentes/mayor-menor/mayor-menor.compo
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,FormsModule,RouterLink, LoginComponent ,PaginaErrorComponent, PresentacionComponent,HomeComponent ,  AppComponent, JuegoAhorcadoComponent, MayorMenorComponent],
+  imports: [RouterOutlet,FormsModule,RouterLink, LoginComponent ,PaginaErrorComponent, PresentacionComponent,HomeComponent ,  AppComponent, JuegoAhorcadoComponent, MayorMenorComponent,RegistroComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
