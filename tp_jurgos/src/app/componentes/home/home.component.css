@@ -43,3 +43,23 @@
   .btn:hover {
     background-color: #0056b3;
   }
+
+  .btn-logout {
+    position: absolute;
+    top: 40px; 
+    right: 40px; 
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #dc3545;
+    color: #fff;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-logout:hover {
+    background-color: #c82333;
+  }

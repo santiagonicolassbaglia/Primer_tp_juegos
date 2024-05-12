@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,UserCredential} from 'firebase/auth'; // Modificado
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,UserCredential, GoogleAuthProvider} from 'firebase/auth'; // Modificado
 import { Usuario } from '../clases/usuario';
 import { Observable } from 'rxjs';
 import {AngularFireDatabase} from '@angular/fire/compat/database';
@@ -29,36 +29,7 @@ export class AuthService {
   }
 
  
-
-//   async registrar(objeto: Usuario) {
-//     try {console.log('entroooo');
-//       objeto.code = this.db.createPushId().substring(0, 10);
-//       console.log('entroooo2');
-//       const path = `${this.PATH}/${objeto.code}`;
-//       console.log('Registrando usuario en Firebase...');
-// await this.db.object(path).set(objeto);
-//       console.log('entroooo3');
-//       console.log('Usuario registrado correctamente');
-//     } catch (error) {
-//       console.error('Error al registrar usuario en Firebase:', error);
-//       throw error; // Lanzar el error para manejarlo en el componente
-//     }
-//   }
-
-// async registrar(objeto: Usuario) {
-//   try {
  
-//     const userCredential: UserCredential = await this.auth.createUserWithEmailAndPassword(objeto.mail, objeto.contraseña);
-//     const uid = userCredential.user.uid;
- 
-//     await this.guardarUsuarioFirestore(uid, objeto.nombre, objeto.mail);
-//     console.log('Usuario registrado correctamente');
-//   } catch (error) {
-//     console.error('Error al registrar usuario en Firebase:', error);
-//     throw error; // Lanzar el error para manejarlo en el componente
-//   }
-// }
-
 async registrar(objeto: Usuario) {
   try {
     // @ts-ignore
@@ -89,9 +60,35 @@ async registrar(objeto: Usuario) {
     });
   }
 
+async logout() {
+    try {
+      await this.auth.signOut();
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+      throw error;
+    }
+  }
+ 
+  async loginWithGoogle() {
+    try {
+      const provider = new GoogleAuthProvider();
+      await this.auth.signInWithPopup(provider);
+    } catch (error) {
+      console.error('Error de inicio de sesión con Google:', error);
+      throw error;
+    }
+  }
+
+  
+
+  } 
+
+
+
 
  
-}
+// import { Injectable } from '@angular/core';
+
 
 //   constructor(private authF: AngularFireAuth) { }
 

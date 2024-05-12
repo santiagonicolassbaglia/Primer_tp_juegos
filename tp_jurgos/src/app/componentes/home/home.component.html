@@ -1,22 +1,23 @@
 <div class="home-container">
-<div>
-  <button routerLink="/presentacion" class="btn btn-primary">Quién soy</button>
-</div>
+  <div class="header">
     <h1>Bienvenido a la Plataforma de Juegos</h1>
-    <div >  <p>Elige un juego para comenzar:</p></div>
-    
-   
-    
+    <button (click)="cerrarSesion()" class="btn btn-logout">Cerrar sesión</button>
+  </div>
+  <div>
+    <button routerLink="/presentacion" class="btn btn-primary">Quién soy</button>
+  </div>
+  <div class="game-options">
+    <p>Elige un juego para comenzar:</p>
     <ul>
       <li> 
         <button (click)="Ahorcado()" class="btn btn-primary">Ahorcado</button>
-      
+      </li>
       <li>
         <button (click)="MayorMenor()"  class="btn btn-primary">Mayor o Menor</button>
       </li>
       <li>
         <button routerLink="/preguntados" class="btn btn-primary">Preguntados</button>
       </li>
-     
     </ul>
   </div>
+</div>

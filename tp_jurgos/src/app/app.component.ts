@@ -9,6 +9,7 @@ import { HomeComponent } from './componentes/home/home.component';
 import { JuegoAhorcadoComponent } from './componentes/juego-ahorcado/juego-ahorcado.component';
 import { MayorMenorComponent } from './componentes/mayor-menor/mayor-menor.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
+import { PreguntadosComponent } from './componentes/preguntados/preguntados.component';
  
 
 
@@ -19,10 +20,11 @@ import { RegistroComponent } from './componentes/registro/registro.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,FormsModule,RouterLink, LoginComponent ,PaginaErrorComponent, PresentacionComponent,HomeComponent ,  AppComponent, JuegoAhorcadoComponent, MayorMenorComponent,RegistroComponent],
+  imports: [RouterOutlet,FormsModule,RouterLink, LoginComponent ,PaginaErrorComponent, PresentacionComponent,HomeComponent ,  AppComponent, JuegoAhorcadoComponent, MayorMenorComponent,RegistroComponent,PreguntadosComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'tp-juegos';
+  
 }

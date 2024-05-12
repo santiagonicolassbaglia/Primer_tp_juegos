@@ -13,23 +13,28 @@
     </div>
     <div>
       <button class="w-100 btn btn-lg btn-primary" type="button" (click)="usuarioPorDefecto()">Usuario por defecto</button>
-     </div>
+    <div *ngIf="mensajeError" class="error">{{ mensajeError }}</div>
+      <div>  <button class="w-100 btn btn-lg btn-primary" type="submit">Iniciar sesión</button>
+  </div>
+    </div>
   
-       
-    <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me" name="recordarme"> Recordarme
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" value="" id="recordarme" [(ngModel)]="recordarme" name="recordarme">
+      <label class="form-check-label" for="recordarme">
+        Recordarme
       </label>
     </div>
-    <div *ngIf="mensajeError" class="error">{{ mensajeError }}</div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Iniciar sesión</button>
 
-    <div>
-      <button routerLink="/registro" class="btn btn-primary">Registrarme</button>
+   
+    <hr>
+    <div class="text-center mt-3">
+      <button class="btn btn-lg btn-primary" type="button" (click)="loginWithGoogle()">
+        <i class="fab fa-google me-2"></i> Iniciar sesión con Google
+      </button>
     </div>
-     
-  
-    
+    <hr>
+    <div class="text-center mt-3">
+      <button routerLink="/registro" class="btn btn-lg btn-primary">Registrarme</button>
+    </div>
   </form>
- 
 </main>

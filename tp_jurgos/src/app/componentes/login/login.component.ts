@@ -7,6 +7,7 @@ import { NgIf } from '@angular/common';
  
 import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
+import firebase from 'firebase/compat';
 
  
 @Component({
@@ -20,10 +21,19 @@ export class LoginComponent implements OnInit{
   mail: string = '';
   clave: string = '';
   mensajeError: string = '';
+  recordarme: boolean = false;
 
   constructor(private router: Router, private authService: AuthService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const usuarioGuardado = localStorage.getItem('usuarioGuardado');
+    if (usuarioGuardado) {
+      const usuario = JSON.parse(usuarioGuardado);
+      this.mail = usuario.mail;
+      this.clave = usuario.clave;
+      this.recordarme = true;
+    }
+  }
 
   async login() {
     try {
@@ -38,6 +48,16 @@ export class LoginComponent implements OnInit{
   usuarioPorDefecto() {
     this.mail = 'santiii@gmail.com';
     this.clave = '123456';
+  }
+
+  async loginWithGoogle() {
+    try {
+      await this.authService.loginWithGoogle();
+ 
+      this.router.navigateByUrl('/home');
+    } catch (error) {
+      console.log('Error de inicio de sesión con Google:', error);
+    }
   }
 }
  
