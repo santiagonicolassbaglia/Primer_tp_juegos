@@ -1,43 +1,48 @@
-<h1 class="text-center">PREGUNTADOS</h1>
-<input type="button" class="btn btn-success btn-block" (click)="onEmpezar()" [hidden]="empezar" value="Empezar">
-<input type="button" class="btn btn-success btn-block" (click)="onEmpezar()" [hidden]="!juegoTerminado" value="Volver a Jugar">
-<div class="containaer" *ngIf="empezar">
-    <div class="row">
-        <div class="col-12" *ngIf="!juegoTerminado">
-            <img id="imgPsj" src="{{img}}">
+<div class="preguntados-container d-flex flex-column justify-content-center align-items-center">
+    <h1>PREGUNTADOS</h1>
+    
+    <input type="button" class="btn btn-success btn-lg btn-block mb-3" (click)="onEmpezar()" [hidden]="empezar" value="Empezar">
+    <input type="button" class="btn btn-success btn-lg btn-block mb-3" (click)="onEmpezar()" [hidden]="!juegoTerminado" value="Volver a Jugar">
+  
+    <div class="container" *ngIf="empezar">
+      <div class="row">
+        <div class="col-12 text-center" *ngIf="!juegoTerminado">
+          <img id="imgPsj" src="{{img}}">
         </div>
         <div class="col-12 text-center">
-            <h1>Puntos:</h1><h1>{{puntos}}</h1> 
-          </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="col-12" *ngIf="!juegoTerminado">
-                        <h3 class="text-center">¿Qué personaje de los Simpson es?</h3>
-                    </div>
-                    <div class="col-12" *ngIf="juegoTerminado">
-                        <div *ngIf="correcta">
-                            <h3 class="text-center alert-success">{{mensaje}}</h3>
-                        </div>
-                        <div *ngIf="!correcta">
-                            <h3 class="text-center alert-danger">{{mensaje}}</h3>
-                        </div>
-                    </div>
-                    <div *ngIf="ordenadas && !juegoTerminado">
-                        <div *ngFor="let psj of arrayPersonajes">
-                            <div class="col-12">
-                                <button (click)="correcto(psj.character)" class="form-control">{{psj.character}}</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          <h2>Puntos: {{puntos}}</h2> 
         </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="col-12 text-center" *ngIf="!juegoTerminado">
+                <h3>¿Qué personaje de los Simpson es?</h3>
+              </div>
+              <div class="col-12 text-center" *ngIf="juegoTerminado">
+                <div *ngIf="correcta">
+                  <h3 class="alert alert-success">{{mensaje}}</h3>
+                </div>
+                <div *ngIf="!correcta">
+                  <h3 class="alert alert-danger">{{mensaje}}</h3>
+                </div>
+              </div>
+              <div *ngIf="ordenadas && !juegoTerminado">
+                <div *ngFor="let psj of arrayPersonajes" class="text-center mb-3">
+                  <button (click)="correcto(psj.character)" class="btn btn-info">{{psj.character}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <br>
+  
     <hr>
+  
     <div class="container">
-        <label>Mejores Puntajes</label>
+      <div class="row">
+        <div class="col-12 text-center">
+          <label>Mejores Puntajes</label>
          
     </div>
 
