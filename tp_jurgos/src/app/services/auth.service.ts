@@ -17,9 +17,9 @@ export class AuthService {
  
 
   constructor(
-    private auth: AngularFireAuth,
-    private firestore: AngularFirestore,
-    private db: AngularFireDatabase
+    public auth: AngularFireAuth,
+    public firestore: AngularFirestore,
+    public db: AngularFireDatabase
   ) {
     this.items$ = this.db.list(this.PATH).valueChanges() as Observable<Usuario[]>;
   }

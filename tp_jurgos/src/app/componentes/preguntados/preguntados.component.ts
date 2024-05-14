@@ -1,49 +1,157 @@
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ApisService } from '../../services/apis.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { Observable } from 'rxjs';
+import { Usuario } from '../../clases/usuario';
 
 @Component({
   selector: 'app-preguntados',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor,NgIf],
   templateUrl: './preguntados.component.html',
   styleUrl: './preguntados.component.css'
 })
-export class PreguntadosComponent implements OnInit{  pregunta: string;
-  opciones: string[];
-  respuestaCorrecta: string;
-  puntaje: number = 0;
+export class PreguntadosComponent implements OnInit {
+   
+  //personajeImg: any;
+  personaje!: any;
+  rtaCorrecta: boolean = false;
+  mensaje!: string;
+  arrayPersonajes: any = [];
+  empezar: boolean = false;
+  img: any;
+  puntos!: number;
+  puntosAux!: number;
+ 
+  usuario: Usuario = new Usuario( "","", "", "");
+  ordenadas: boolean = false;
+  juegoTerminado: boolean = false;
+  correcta: boolean = false;
+  public usuario$: Observable<any> = this.authService.auth.user;
+
+
+  constructor(private apiSvc: ApisService, public router: Router, public authService: AuthService ) {
+ 
+    this.usuario$.subscribe((result: any) => {
+      this.usuario.mail = result['email'];
+      this.usuario.code = result['uid']
+
+    });
+   }
 
   ngOnInit(): void {
-    // Lógica para cargar la primera pregunta al iniciar el componente
-    this.cargarPregunta();
   }
 
-  cargarPregunta() {
-    // Lógica para cargar una pregunta aleatoria y sus opciones de respuesta
-    // Esto puede implicar el uso de una API para obtener preguntas y respuestas
-    // Por ahora, supongamos que tenemos las preguntas y respuestas en un array
-    const preguntas = [
-      { pregunta: '¿Cuál es la capital de Francia?', opciones: ['Londres', 'Madrid', 'París', 'Berlín'], respuestaCorrecta: 'París' },
-      // Otras preguntas aquí
-    ];
-
-    // Seleccionar una pregunta aleatoria del array
-    const index = Math.floor(Math.random() * preguntas.length);
-    const preguntaSeleccionada = preguntas[index];
-
-    // Mostrar la pregunta y las opciones en la interfaz de usuario
-    this.pregunta = preguntaSeleccionada.pregunta;
-    this.opciones = preguntaSeleccionada.opciones;
-    this.respuestaCorrecta = preguntaSeleccionada.respuestaCorrecta;
+  async traerPersonaje(){
+    this.apiSvc.obtenerPersonaje().subscribe((personaje:any) =>{
+      this.personaje = personaje[0];
+      this.img = personaje[0].image;
+      this.arrayPersonajes.push(personaje[0]);
+    },
+      (error: any) => {
+      console.log(error)}
+    );
+    this.cargarPersonajes();
   }
 
-  verificarRespuesta(respuesta: string) {
-    // Verificar si la respuesta seleccionada es correcta
-    if (respuesta === this.respuestaCorrecta) {
-      // Incrementar el puntaje si la respuesta es correcta
-      this.puntaje++;
+
+  cargarPersonajes(){
+    this.arrayPersonajes = [];
+
+    this.apiSvc.obtenerPersonaje().subscribe((personaje:any) =>{
+      this.arrayPersonajes.push(personaje[0]);
+    },
+      (    error: any) => {
+      console.log(error)}
+    );
+
+    this.apiSvc.obtenerPersonaje().subscribe((personaje:any) =>{
+      this.arrayPersonajes.push(personaje[0]);
+    },
+      (    error: any) => {
+      console.log(error)}
+    );
+
+    this.apiSvc.obtenerPersonaje().subscribe((personaje:any) =>{
+      this.arrayPersonajes.push(personaje[0]);
+    },
+      (    error: any) => {
+      console.log(error)}
+    );
+    setTimeout(() => {
+      //this.validarRepetido(this.personaje.character);
+      this.desordenarRespuestas();
+      this.ordenadas = true;
+    }, 500);
+    
+  }
+
+  validarRepetido(personajeNombre: string){ 
+    let eliminado = false;
+    console.log(this.arrayPersonajes);
+    for (let index = 0; index < this.arrayPersonajes.length; index++) {
+      if(personajeNombre == this.arrayPersonajes[index].character){
+        console.log(this.arrayPersonajes[index]);
+        this.arrayPersonajes.splice(this.arrayPersonajes[index], 1);
+        console.log("personaje eliminado repetido");
+        
+        eliminado = true;
+        console.log(eliminado);
+      } 
+    }
+    //console.log(eliminado);
+    if(!eliminado){
+      console.log("lista con personaje repetido eliminado");
+      console.log(this.arrayPersonajes);
+      this.arrayPersonajes.splice(this.arrayPersonajes[0], 1);
+    }
+    console.log(this.arrayPersonajes);
+    this.arrayPersonajes.push(this.personaje)
+    console.log("lista de personajes validada");
+    console.log(this.arrayPersonajes);
+    
+  }
+
+  desordenarRespuestas()
+  {
+    this.arrayPersonajes.sort(function (){return Math.random() - 0.5} );
+  }
+
+  correcto(nombre:string){
+    if(nombre == this.personaje.character){
+      this.rtaCorrecta = true;
+      this.mensaje = "Correcto!";
+      this.puntos += 10;
+      this.puntosAux = this.puntos;
+      this.correcta = true;
+    }
+    else{
+       
+      this.mensaje = "Perdiste!";
+      this.puntos = 0;
+      this.puntosAux = 0;
+      this.juegoTerminado = true;
+      this.correcta = false;
     }
 
-    // Cargar la siguiente pregunta
-    this.cargarPregunta();
-  }}
+    this.traerPersonaje();
+  }
+
+  async onEmpezar(){
+    this.empezar = true;
+    this.juegoTerminado = false;
+    this.correcta = false;
+    this.traerPersonaje();
+    this.puntos = 0;
+    this.puntosAux = 0;
+ 
+    //this.validarRepetido(this.personaje.character);
+  }
+
+   
+
+  
+}
+ 
