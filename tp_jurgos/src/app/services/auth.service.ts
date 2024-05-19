@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,UserCredential, GoogleAuthProvider} from 'firebase/auth'; // Modificado
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,UserCredential, GoogleAuthProvider, User} from 'firebase/auth'; // Modificado
 import { Usuario } from '../clases/usuario';
 import { Observable } from 'rxjs';
 import {AngularFireDatabase} from '@angular/fire/compat/database';
@@ -14,7 +14,8 @@ export class AuthService {
 
   private PATH = 'Usuarios';
   private items$: Observable<Usuario[]>;
- 
+ public loguado: boolean = false;
+ public esAdmin: boolean = false;
 
   constructor(
     public auth: AngularFireAuth,
@@ -79,12 +80,27 @@ async logout() {
     }
   }
 
-  
 
+  estaLogueado() {
+    return this.auth.currentUser !== null;
+ 
   } 
 
+ usuarioActual(): Promise<Usuario> {
 
-
+    return new Promise((resolve, reject) => {
+      this.auth.onAuthStateChanged((user) => {
+        if (user) {
+          this.firestore.collection('Usuarios').doc(user.uid).valueChanges().subscribe((usuario: Usuario) => {
+            resolve(usuario);
+          });
+        } else {
+          reject('No hay un usuario logueado');
+        }
+      });
+    });
+  }
+}
 
  
 // import { Injectable } from '@angular/core';

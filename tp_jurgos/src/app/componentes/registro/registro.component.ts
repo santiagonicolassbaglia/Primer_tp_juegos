@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PaginaErrorComponent } from '../pagina-error/pagina-error.component';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
@@ -9,21 +9,49 @@ import { Usuario } from '../../clases/usuario';
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [FormsModule   , PaginaErrorComponent, NgIf],
+  imports: [FormsModule, ReactiveFormsModule  , PaginaErrorComponent, NgIf],
   templateUrl: './registro.component.html',
   styleUrl: './registro.component.css'
 })
-export class RegistroComponent {
+export class RegistroComponent implements OnInit {
 
   nombre: string = '';
   mail: string = '';
   clave: string = '';
   mensajeError: string = '';
+  
+  //para validaciones
 
+  private fb=inject(FormBuilder);
+  protected form: FormGroup;
+  
   constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+
+    // this.form = this.fb.group({
+    // nombre: new FormControl(null,Validators.compose([Validators.required, Validators.minLength(3)])),
+    // mail: new FormControl(null,Validators.compose([Validators.required, Validators.email])),
+    // clave: new FormControl(null,Validators.compose([Validators.required, Validators.minLength(6)]))
+
+    // });
+
+    const required = Validators.required;
+
+this.form = this.fb.group({
+ 
+ 
+});
+  }
+
+ 
+
 
   registrar() {
     // Verificar que los campos no estén vacíos
+if (this.hasError()) {
+      return;
+    }
     if (!this.nombre || !this.mail || !this.clave) {
       this.mensajeError = 'Por favor, completa todos los campos.';
       return;
@@ -42,4 +70,11 @@ export class RegistroComponent {
       console.error('Error al registrar usuario:', error);
     });
   }
+
+  private hasError(): boolean {
+    this.form.markAllAsTouched();
+    return this.form.invalid;
+     }
+
+
 }

@@ -10,6 +10,10 @@ import { JuegoAhorcadoComponent } from './componentes/juego-ahorcado/juego-ahorc
 import { MayorMenorComponent } from './componentes/mayor-menor/mayor-menor.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { PreguntadosComponent } from './componentes/preguntados/preguntados.component';
+import { TriviaComponent } from './componentes/trivia/trivia.component';
+import { HomeadminComponent } from './componentes/homeadmin/homeadmin.component';
+import { SantiDiceComponent } from './componentes/santi-dice/santi-dice.component';
+ 
  
 
 
@@ -20,11 +24,11 @@ import { PreguntadosComponent } from './componentes/preguntados/preguntados.comp
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,FormsModule,RouterLink, LoginComponent ,PaginaErrorComponent, PresentacionComponent,HomeComponent ,  AppComponent, JuegoAhorcadoComponent, MayorMenorComponent,RegistroComponent,PreguntadosComponent],
+  imports: [RouterOutlet,FormsModule,RouterLink, LoginComponent ,PaginaErrorComponent, PresentacionComponent,HomeComponent ,  AppComponent, JuegoAhorcadoComponent, MayorMenorComponent,RegistroComponent,PreguntadosComponent,TriviaComponent,HomeadminComponent, SantiDiceComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'tp-juegos';
-  
+ 
 }

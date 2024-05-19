@@ -1,57 +1,60 @@
 .quien-soy-container {
-    background-color: #f7f7f7;
-    padding: 40px;
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: #283b3f26; /* Cambiamos el tono del fondo a un gris más oscuro */
+  padding: 40px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin: auto; /* Centramos el contenedor en el medio de la página */
+  width: 80%; /* Limitamos el ancho del contenedor para que no ocupe toda la pantalla */
+  max-width: 800px; /* Ajustamos el ancho máximo para pantallas más grandes */
+  display: flex; /* Usamos flexbox para centrar verticalmente */
+  flex-direction: column;  
+  justify-content: center;  
+}
+
+.title {
+  font-size: 3rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(9, 90, 167, 0.2);
+}
+
+.description {
+  font-size: 1.5rem;
+  color: #666;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.title:hover {
+  color: #007bff;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.photo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* Añadimos un poco de margen superior para separar el contenido del contenedor de la foto */
+}
+
+.centered-image {
+  max-width: 40rem;
+  max-height: 75rem;
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 2s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
   }
-  
-  .title {
-    font-size: 3rem;
-    color: #333;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  100% {
+    opacity: 1;
   }
-  
-  .description {
-    font-size: 1.5rem;
-    color: #666;
-    margin-bottom: 20px;
-    line-height: 1.6;
-  }
-  
-  
-  .title:hover {
-    color: #007bff;
-    text-decoration: underline;
-    transition: color 0.3s ease;
-  
-  }
-  .photo-container {
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    height: 50%;
-  }
-  
-  .centered-image {
-    max-width: 30%;
-    max-height: 50%;
-  }
-  
- 
-  .fade-in {
-    opacity: 0;  
-    animation: fadeIn 2s ease-in-out forwards; 
-  }
-  
- 
-  @keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-  }
+}

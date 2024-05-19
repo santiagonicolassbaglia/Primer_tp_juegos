@@ -1,0 +1,21 @@
+.container {
+    padding: 20px;
+  }
+  
+  .card {
+    margin-bottom: 20px;
+  }
+  
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .list-group-item {
+    cursor: pointer;
+  }
+  
+  .text-danger {
+    color: red;
+  }
+  

@@ -1,0 +1,12 @@
+<div *ngIf="triviaData">
+  <h1>Trivia Questions</h1>
+  <ul>
+    <li *ngFor="let trivia of preguntasTrivia">
+      <p>{{ trivia.question }}</p>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="!triviaData">
+  <p>Loading trivia questions...</p>
+</div>

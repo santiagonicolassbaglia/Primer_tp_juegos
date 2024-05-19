@@ -1,7 +1,10 @@
 <div class="home-container">
   <div class="header">
-    <h1>Bienvenido a la Plataforma de Juegos</h1>
+    <h1>Bienvenido {{nombreUsuario}}, a la Plataforma de Juegos</h1>
     <button (click)="cerrarSesion()" class="btn btn-logout">Cerrar sesión</button>
+  </div>
+  <div>
+    <button routerLink="/homeAdmin" class="btn btn-primary">hOME ADMIN</button>
   </div>
   <div>
     <button routerLink="/presentacion" class="btn btn-primary">Quién soy</button>
@@ -17,6 +20,12 @@
       </li>
       <li>
         <button routerLink="/preguntados" class="btn btn-primary">Preguntados</button>
+      </li>
+      <li>
+        <button routerLink="/trivia" class="btn btn-primary">Trivia</button>
+      </li>
+      <li>
+        <button routerLink="/santiDice" class="btn btn-primary">Juego Adivina</button>
       </li>
     </ul>
   </div>

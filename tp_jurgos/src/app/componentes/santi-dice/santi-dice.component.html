@@ -1,0 +1,13 @@
+<div class="santi-dice-container">
+    <h1>Santi Dice</h1>
+    <div class="colores-container">
+      <div id="rojo" class="color rojo" (click)="seleccionarColor('rojo')"></div>
+      <div id="verde" class="color verde" (click)="seleccionarColor('verde')"></div>
+      <div id="azul" class="color azul" (click)="seleccionarColor('azul')"></div>
+      <div id="amarillo" class="color amarillo" (click)="seleccionarColor('amarillo')"></div>
+    </div>
+    <button (click)="iniciarJuego()">Iniciar Juego</button>
+    <p>{{ mensajeInicio }}</p>
+    <p>{{ mensaje }}</p>
+  </div>
+  
