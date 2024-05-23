@@ -13,6 +13,7 @@ import { PreguntadosComponent } from './componentes/preguntados/preguntados.comp
 import { TriviaComponent } from './componentes/trivia/trivia.component';
 import { HomeadminComponent } from './componentes/homeadmin/homeadmin.component';
 import { SantiDiceComponent } from './componentes/santi-dice/santi-dice.component';
+import { ChatComponent } from './componentes/chat/chat.component';
  
  
 
@@ -24,7 +25,7 @@ import { SantiDiceComponent } from './componentes/santi-dice/santi-dice.componen
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,FormsModule,RouterLink, LoginComponent ,PaginaErrorComponent, PresentacionComponent,HomeComponent ,  AppComponent, JuegoAhorcadoComponent, MayorMenorComponent,RegistroComponent,PreguntadosComponent,TriviaComponent,HomeadminComponent, SantiDiceComponent],
+  imports: [RouterOutlet,FormsModule,RouterLink, LoginComponent ,PaginaErrorComponent, PresentacionComponent,HomeComponent ,  AppComponent, JuegoAhorcadoComponent, MayorMenorComponent,RegistroComponent,PreguntadosComponent,TriviaComponent,HomeadminComponent, SantiDiceComponent,ChatComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -100,6 +100,11 @@ async logout() {
       });
     });
   }
+
+
+  getCurrentUser(): Observable<User | null> {
+    return this.auth.authState;
+  }
 }
 
  

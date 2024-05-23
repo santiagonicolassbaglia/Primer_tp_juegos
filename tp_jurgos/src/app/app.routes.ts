@@ -21,6 +21,7 @@ export const routes: Routes = [
     {path: 'preguntados', loadComponent: () => import('./componentes/preguntados/preguntados.component').then(m => m.PreguntadosComponent)},
     {path: 'trivia', loadComponent: () => import('./componentes/trivia/trivia.component').then(m => m.TriviaComponent)},
     {path: 'santiDice', loadComponent: () => import('./componentes/santi-dice/santi-dice.component').then(m => m.SantiDiceComponent)},
+    {path: 'chat', loadComponent: () => import('./componentes/chat/chat.component').then(m => m.ChatComponent)},
     {path: 'homeAdmin', loadComponent: () => import('./componentes/homeadmin/homeadmin.component').then(m => m.HomeadminComponent),canActivate: [adminGuard]},
     
   
