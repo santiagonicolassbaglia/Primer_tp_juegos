@@ -16,7 +16,7 @@ import { Usuario } from '../../clases/usuario';
 })
 export class HomeComponent implements OnInit {
 
-  nombreUsuario: Usuario  ;
+  nombreUsuario: string = '';
 private gitSrv = inject(GithubService);
 
   constructor(private router: Router, private authService: AuthService) { } // Inject Router service
@@ -24,7 +24,9 @@ private gitSrv = inject(GithubService);
   ngOnInit(): void {
 
     this.authService.usuarioActual().then((usuario: Usuario) => {
-      this.nombreUsuario = usuario;
+      if (usuario) {
+        this.nombreUsuario = usuario.nombre;
+      } 
     }).catch(error => {
       console.error('Error al obtener el usuario actual:', error);
     });
