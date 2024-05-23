@@ -1,17 +1,12 @@
-<!-- chat.component.html -->
-<div class="chat-container" *ngIf="user">
-    <div class="messages">
-      <div *ngFor="let message of messages" class="message">
-        <strong>{{ message.userEmail }}</strong> to <strong>{{ message.recipientEmail }}</strong> at <strong>{{ message.timestamp }}</strong>: {{ message.message }}
-      </div>
-    </div>
-    <div class="input-container">
-      <input type="text" [(ngModel)]="recipientEmail" placeholder="Recipient's email" />
-      <input type="text" [(ngModel)]="newMessage" placeholder="Your message" />
-      <button (click)="sendMessage()">Send</button>
+<div class="chat-container">
+  <div class="messages">
+    <div *ngFor="let message of messages" class="message">
+      <strong>{{ message.user }} {{tiempo}}</strong>: {{ message.message }}
     </div>
   </div>
-  <div *ngIf="!user">
-    <p>Please log in to use the chat.</p>
+  <div class="input-container">
+    <input type="text" [(ngModel)]="newMessage" placeholder="Tu mensaje" (keydown.enter)="sendMessage()" />
+    <button (click)="sendMessage()">Enviar</button>
+    <button (click)="borrarMensajes()">Borrar Mensajes</button>
   </div>
-  
+</div>

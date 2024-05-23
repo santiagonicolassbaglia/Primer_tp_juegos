@@ -1,14 +1,12 @@
-// chat.service.ts
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import firebase from 'firebase/compat/app';
 
 export interface ChatMessage {
+  id?: string;
+  user: string;
   message: string;
-  userEmail: string;
-  recipientEmail: string;
   timestamp: Date;
 }
 
@@ -16,36 +14,41 @@ export interface ChatMessage {
   providedIn: 'root'
 })
 export class ChatService {
+
   private messagesCollection: AngularFirestoreCollection<ChatMessage>;
 
   constructor(private firestore: AngularFirestore) {
     this.messagesCollection = firestore.collection<ChatMessage>('messages', ref => ref.orderBy('timestamp', 'asc'));
   }
 
+  borrarTodosLosMensajes(): Promise<void> {
+    return this.firestore.collection('messages').get().toPromise().then(snapshot => {
+      const batch = this.firestore.firestore.batch();
+      snapshot.docs.forEach(doc => batch.delete(doc.ref));
+      return batch.commit();
+    });
+  }
+  
   getMessages(): Observable<ChatMessage[]> {
-    return this.messagesCollection.snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as ChatMessage;
-        const timestamp = data.timestamp as unknown as firebase.firestore.Timestamp;
-        return {
-          ...data,
-          timestamp: timestamp.toDate()
-        };
-      }))
-    );
+    return this.messagesCollection.valueChanges();
   }
 
-  sendMessage(message: string, recipientEmail: string): Promise<void> {
-    const userEmail = firebase.auth().currentUser?.email;
-    if (!userEmail) {
-      return Promise.reject('User not logged in');
-    }
-    const newMessage: ChatMessage = {
-      message,
-      userEmail,
-      recipientEmail,
-      timestamp: new Date()
-    };
-    return this.messagesCollection.add(newMessage).then(() => {});
+  sendMessage(user: string, message: string, timestamp: Date): Promise<void> {
+    const id = this.firestore.createId();
+    return this.messagesCollection.doc(id).set({ id, user, message, timestamp });
+  }
+
+  getNonEmptyUserNames(): Observable<string[]> {
+    return this.firestore.collection<ChatMessage>('messages').valueChanges().pipe(
+      map(messages => messages.filter(message => message.message.trim() !== '')),
+      map(messages => messages.map(message => message.user)),
+      map(users => users.filter((user, index, users) => users.indexOf(user) === index)
+     
+    ));
+    
+  }
+
+  getMessagesByUser(user: string): Observable<ChatMessage[]> {
+    return this.firestore.collection<ChatMessage>('messages', ref => ref.where('user', '==', user)).valueChanges();
   }
 }

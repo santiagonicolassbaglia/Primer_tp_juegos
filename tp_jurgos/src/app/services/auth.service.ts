@@ -3,9 +3,11 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,UserCredential, GoogleAuthProvider, User} from 'firebase/auth'; // Modificado
 import { Usuario } from '../clases/usuario';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import {AngularFireDatabase} from '@angular/fire/compat/database';
+import firebase from 'firebase/compat/app';
  
+import { switchMap } from 'rxjs/operators';
  
 @Injectable({
   providedIn: 'root'
@@ -101,11 +103,53 @@ async logout() {
     });
   }
 
-
-  getCurrentUser(): Observable<User | null> {
-    return this.auth.authState;
-  }
-}
+ 
+  
+    getCurrentUser(): Observable<firebase.User | null> {
+      return this.auth.authState;
+    }
+  
+    getCurrentUserName(): Observable<string | null> {
+      return this.auth.authState.pipe(
+        switchMap(user => {
+          if (user) {
+            return this.firestore.collection('Usuarios').doc(user.uid).valueChanges().pipe(
+              switchMap((userDoc: any) => of(userDoc?.nombre || null))
+            );
+          } else {
+            return of(null);
+          }
+        })
+      );
+    }
+  
+ 
+    async verificarMensajeExistenteAlIniciarSesion(): Promise<void> {
+      const user = firebase.auth().currentUser;
+      if (!user) {
+        console.error('Usuario no autenticado al verificar el mensaje existente al iniciar sesión');
+        return;
+      }
+   
+      const snapshot = await this.firestore.collection('messages').ref
+        .where('userEmail', '==', user.email)
+        .get();
+  
+      if (snapshot.empty) {
+        console.log('No hay mensajes existentes para este usuario al iniciar sesión');
+        return;
+      }
+  
+      // Eliminar los mensajes existentes para este usuario
+      const batch = this.firestore.firestore.batch();
+      snapshot.forEach(doc => {
+        batch.delete(doc.ref);
+      });
+  
+      // Ejecutar la transacción
+      await batch.commit();
+      console.log('Mensajes existentes eliminados para este usuario al iniciar sesión');
+    }
 
  
 // import { Injectable } from '@angular/core';
@@ -127,7 +171,7 @@ async logout() {
 
   
   
-
+  }
 
 
  

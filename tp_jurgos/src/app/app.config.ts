@@ -1,4 +1,4 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, LOCALE_ID, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -17,6 +17,7 @@ import { environment } from '../assets/environments/environment.prod';
 export const appConfig: ApplicationConfig = {
   providers: 
   [provideRouter(routes), 
+   
     provideHttpClient(),
     importProvidersFrom(
     AngularFireModule.initializeApp(environment.firebaseConfig)), 
