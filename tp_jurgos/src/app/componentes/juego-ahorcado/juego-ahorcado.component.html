@@ -1,40 +1,41 @@
-
+<button routerLink="/home" class="btn btn-primary">Volver</button>
 <div class="ahorcado-container">
-    <!-- Aquí puedes mostrar una imagen del ahorcado (puede ser un dibujo animado) -->
-    <img src="assets/imagenes/ahorcado.png" alt="Ahorcado"  style="width: 10rem;"/>
-  
-    
-    <!-- Mostrar las letras adivinadas -->
-    <div class="word-display">
-      <span *ngFor="let letter of palabraOculta">{{ letter }}</span>
-    </div>
-   
-    <div class="guess-input">
-      <label for="letterInput" style="margin-right: 2rem;">Selecciona una letra: </label>
-      <div class="letter-buttons">
-        <button *ngFor="let letra of letrasDisponibles" (click)="adivinarLetra(letra)" [disabled]="letrasAdivinadas.includes(letra) || juegoTerminado" class="letter-button">{{ letra }}</button>
-      </div>
-    </div>
-    <div>
-      <button (click)="generarAyuda()" style="background-color: floralwhite;">Ayuda</button>
-  
-    </div>
-   
-    <div class="attempts-left">
-      Intentos restantes: {{ intentosRestantes }}
-    </div>
-  
-     
-   
-    <div class="game-message">
-      <p *ngIf="">Ya has ingresado esta letra</p>
-   
-    
-      <p *ngIf="juegoGanado">¡Has ganado!</p>
-      <p *ngIf="juegoTerminado">La palabra es "{{ palabraAdivinar }}"</p>
-      <p *ngIf="juegoPerdido">¡Has perdido!"</p>
-    </div>
-   
-    <button *ngIf="juegoTerminado" (click)="reiniciarJuego()">Jugar de nuevo</button>
+ 
+  <!-- Aquí puedes mostrar una imagen del ahorcado (puede ser un dibujo animado) -->
+  <img [src]="getImagenAhorcado()" alt="Ahorcado" style="width: 10rem;" />
+
+  <!-- Mostrar las letras adivinadas -->
+  <div class="word-display">
+    <span *ngFor="let letter of palabraOculta">{{ letter }}</span>
   </div>
-  
+
+  <div class="guess-input">
+    <label for="letterInput" style="margin-right: 2rem;">Selecciona una letra: </label>
+    <div class="letter-buttons">
+      <button *ngFor="let letra of letrasDisponibles" (click)="adivinarLetra(letra)" [disabled]="letrasAdivinadas.includes(letra) || juegoTerminado" class="letter-button">{{ letra }}</button>
+    </div>
+  </div>
+
+ 
+  <div>
+    <button *ngIf="puntos > 0" (click)="generarAyuda()" class="help-button">Ayuda</button>
+   
+  </div>
+
+  <div class="attempts-left">
+    Intentos restantes: {{ intentosRestantes }}
+  </div>
+
+  <div class="game-message">
+    <p *ngIf="">Ya has ingresado esta letra</p>
+    <p *ngIf="juegoGanado">¡Has ganado!</p>
+    <p *ngIf="juegoTerminado">La palabra es "{{ palabraAdivinar }}"</p>
+    <p *ngIf="juegoPerdido">¡Has perdido!</p>
+  </div>
+
+  <button *ngIf="juegoTerminado" (click)="reiniciarJuego()">Jugar de nuevo</button>
+
+  <div class="points-display">
+    Puntos: {{ puntos }}
+  </div>
+</div>

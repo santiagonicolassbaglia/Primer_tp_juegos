@@ -1,7 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ApisService } from '../../services/apis.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
 import { Usuario } from '../../clases/usuario';
@@ -9,7 +9,7 @@ import { Usuario } from '../../clases/usuario';
 @Component({
   selector: 'app-preguntados',
   standalone: true,
-  imports: [NgFor,NgIf],
+  imports: [NgFor,NgIf,RouterModule],
   templateUrl: './preguntados.component.html',
   styleUrl: './preguntados.component.css'
 })

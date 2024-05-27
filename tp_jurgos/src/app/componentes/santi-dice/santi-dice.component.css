@@ -1,64 +1,80 @@
 .santi-dice-container {
-    text-align: center;
-    margin-top: 50px;
-  }
-  
-  .colores-container {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-  }
-  
-  .color {
-    width: 100px;
-    height: 100px;
-    margin: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  .color:active {
-    transform: scale(0.9);
-  }
-  
-  
-  .rojo {
-    background-color: red;
-  }
-  
-  .verde {
-    background-color: green;
-  }
-  
-  .azul {
-    background-color: blue;
-  }
-  
-  .amarillo {
-    background-color: yellow;
-  }
-  
-  .resaltar {
-    filter: brightness(200%);
-    border: 5px solid white;
-    transform: scale(1.2);
-  }
-  
-  button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 20px;
-  }
-  button:hover {
-    background-color: #0056b3;
-  }
-  button:focus {
-    outline: none;
-  }
-  
-  p {
-    font-size: 18px;
-    margin-top: 20px;
-  }
-  
+  text-align: center;
+  margin-top: 50px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.colores-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.color {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.color:active {
+  transform: scale(0.9);
+}
+
+.rojo {
+  background-color: #ff4c4c;
+}
+
+.verde {
+  background-color: #4caf50;
+}
+
+.azul {
+  background-color: #2196f3;
+}
+
+.amarillo {
+  background-color: #ffeb3b;
+}
+
+.resaltar {
+  filter: brightness(200%);
+  border: 5px solid white;
+  transform: scale(1.2);
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:focus {
+  outline: none;
+}
+
+.puntaje {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+p {
+  font-size: 18px;
+  margin-top: 20px;
+}

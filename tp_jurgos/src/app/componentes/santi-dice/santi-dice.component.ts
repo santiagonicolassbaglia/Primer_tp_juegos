@@ -1,27 +1,26 @@
 import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-santi-dice',
   standalone: true,
-  imports: [NgIf],
+  imports: [NgIf, RouterModule],
   templateUrl: './santi-dice.component.html',
-  styleUrl: './santi-dice.component.css'
+  styleUrls: ['./santi-dice.component.css']
 })
-export class SantiDiceComponent implements OnInit{
-
-
+export class SantiDiceComponent implements OnInit {
   secuencia: string[] = [];
   colores: string[] = ['rojo', 'verde', 'azul', 'amarillo'];
   secuenciaJugador: string[] = [];
   enJuego: boolean = false;
   mensaje: string = '';
   mensajeInicio: string = 'Presiona "Iniciar Juego" para comenzar';
+  puntaje: number = 0;
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   iniciarJuego() {
     this.secuencia = [];
@@ -29,6 +28,7 @@ export class SantiDiceComponent implements OnInit{
     this.enJuego = true;
     this.mensaje = '';
     this.mensajeInicio = 'El juego ha comenzado. Memoriza la secuencia.';
+    this.puntaje = 0;
     setTimeout(() => {
       this.mensajeInicio = '';
       this.agregarColorSecuencia();
@@ -70,6 +70,7 @@ export class SantiDiceComponent implements OnInit{
       this.enJuego = false;
       this.mensaje = 'Perdiste! Inténtalo de nuevo.';
     } else if (this.secuenciaJugador.length === this.secuencia.length) {
+      this.puntaje++;
       this.secuenciaJugador = [];
       this.mensaje = 'Bien hecho! Continuemos...';
       setTimeout(() => this.agregarColorSecuencia(), 1000);

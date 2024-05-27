@@ -3,19 +3,29 @@
   margin: 0 auto;
   padding: 20px;
   background-image: url('../../../assets/imagenes/wp.jpg');
-  background-size: cover; /* Ajusta la imagen al tamaño del contenedor */
+  background-size: cover;
+  background-position: center;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
+
 .messages {
   max-height: 400px;
   overflow-y: auto;
   margin-bottom: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .message {
   padding: 10px;
-  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #f1f1f1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .input-container {
@@ -28,6 +38,8 @@ input[type="text"] {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 button {
@@ -37,9 +49,22 @@ button {
   background-color: #007bff;
   color: white;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-  background-color: #036627;
-   
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button:nth-child(2) {
+  background-color: #dc3545;
+}
+
+button:nth-child(2):hover {
+  background-color: #c82333;
 }

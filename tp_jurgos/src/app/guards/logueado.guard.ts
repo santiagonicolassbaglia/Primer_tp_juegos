@@ -1,16 +1,17 @@
 import { CanActivateFn } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { inject } from '@angular/core';
+import { map, tap } from 'rxjs';
 
 export const logueadoGuard: CanActivateFn = (route, state) => {
-
- const authS = inject(AuthService);
-
-  if (!authS.estaLogueado()) {
-    console.log('No estás logueado');
-    return false;
-  }
- 
-  return true;
-
+  const authService = inject(AuthService);
+  return authService.getCurrentUser().pipe(
+    map(user => !!user), // Si hay un usuario logueado, devuelve true
+    tap(loggedIn => {
+      if (!loggedIn) {
+        console.error('Acceso denegado - Usuario no autenticado');
+        window.location.href = '/login'; // Redirige a la página de login si no está autenticado
+      }
+    })
+  );
 };

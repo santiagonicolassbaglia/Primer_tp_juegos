@@ -6,8 +6,8 @@ import { Usuario } from '../clases/usuario';
 import { Observable, of } from 'rxjs';
 import {AngularFireDatabase} from '@angular/fire/compat/database';
 import firebase from 'firebase/compat/app';
+import { switchMap, map, tap } from 'rxjs/operators';
  
-import { switchMap } from 'rxjs/operators';
  
 @Injectable({
   providedIn: 'root'

@@ -1,10 +1,11 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-juego-ahorcado',
   standalone: true,
-  imports: [NgIf,NgFor],
+  imports: [NgIf, NgFor, RouterModule],
   templateUrl: './juego-ahorcado.component.html',
   styleUrl: './juego-ahorcado.component.css'
 })
@@ -17,6 +18,7 @@ export class JuegoAhorcadoComponent implements OnInit {
   juegoPerdido: boolean = false;
   juegoGanado: boolean = false;
   letraInput: string = "";
+  puntos: number = 0;  
 
   letrasDisponibles: string[] = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
@@ -34,20 +36,26 @@ export class JuegoAhorcadoComponent implements OnInit {
       this.palabraOculta.push('_' + "  ");
     }
     this.letrasAdivinadas = [];
+    this.juegoTerminado = false;
+    this.juegoGanado = false;
+    this.juegoPerdido = false;
+    this.intentosRestantes = 6;
   }
 
   adivinarLetra(letra: string) {
     if (this.juegoTerminado || this.letrasAdivinadas.includes(letra)) {
       return;
     }
-  
+
     if (this.palabraAdivinar.includes(letra)) {
       this.letrasAdivinadas.push(letra);
       this.actualizarPalabraOculta();
-  
+
       if (this.palabraOculta.join('') === this.palabraAdivinar) {
         this.juegoGanado = true;
         this.juegoTerminado = true;
+        this.puntos+=10;  
+        setTimeout(() => this.iniciarJuego(), 2000); // Reiniciar juego con nueva palabra después de 2 segundos
       }
     } else {
       this.intentosRestantes--;
@@ -55,12 +63,13 @@ export class JuegoAhorcadoComponent implements OnInit {
         this.juegoPerdido = true;
         this.juegoTerminado = true;
       }
-      this.letrasAdivinadas.push(letra); // Agregar la letra a letrasAdivinadas
+      this.letrasAdivinadas.push(letra);
     }
   }
+
   actualizarPalabraOculta() {
     this.palabraOculta = [];
-  
+
     for (let i = 0; i < this.palabraAdivinar.length; i++) {
       const letra = this.palabraAdivinar[i];
       if (this.letrasAdivinadas.includes(letra)) {
@@ -70,37 +79,35 @@ export class JuegoAhorcadoComponent implements OnInit {
       }
     }
   }
+
   reiniciarJuego() {
     this.iniciarJuego();
-    this.intentosRestantes = 6;
-    this.juegoTerminado = false;
-    this.juegoGanado = false;
-    this.juegoPerdido = false;
-    this.letrasAdivinadas = [];
-    this.letraInput = "";
+    this.puntos = 0;
   }
- 
+
   generarAyuda(): void {
     if (this.juegoTerminado) {
       return;
     }
-  
+this.puntos-=5;
     const palabraOcultaStr = this.palabraOculta.join('');
     const letrasNoAdivinadas = palabraOcultaStr.split('_').filter(letra => letra !== ' ');
     const letrasRestantes = this.letrasDisponibles.filter(letra => !this.letrasAdivinadas.includes(letra) && !letrasNoAdivinadas.includes(letra));
-    
+
     if (letrasRestantes.length === 0) {
       return;
     }
-  
-    // Aquí seleccionamos una letra de la palabra a adivinar
+
     const palabraRestante = this.palabraAdivinar.split('').filter(letra => !this.letrasAdivinadas.includes(letra));
-    
+
     if (palabraRestante.length === 0) {
       return;
     }
-  
+
     const letraAyuda = palabraRestante[Math.floor(Math.random() * palabraRestante.length)];
     this.adivinarLetra(letraAyuda);
+  }
+  getImagenAhorcado(): string {
+    return `../../../assets/imagenes/etapasAhorcado/ahorcado${6 - this.intentosRestantes}.png`;
   }
 }

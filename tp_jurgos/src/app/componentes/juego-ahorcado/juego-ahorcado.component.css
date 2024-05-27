@@ -1,66 +1,81 @@
 .ahorcado-container {
-    text-align: center;
-    padding: 20px;
-    background-color: #f7f7f7;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .word-display {
-    font-size: 2rem;
-    margin: 20px 0;
-  }
-  
-  .guessed-letters {
-    font-size: 1.5rem;
-    margin: 10px 0;
-  }
-  
-  .guess-input {
-    margin: 20px 0;
-  }
-  
-  .guess-input label {
-    font-size: 1.2rem;
-  }
-  
-  .guess-input input {
-    font-size: 1.2rem;
-    padding: 5px;
-  }
-  
-  .attempts-left {
-    font-size: 1.2rem;
-    margin: 10px 0;
-  }
-  
-  .game-message {
-    font-size: 1.5rem;
-    margin: 20px 0;
-  }
-  
-  .game-message p {
-    color: red;
-    font-weight: bold;
-  }
+  text-align: center;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
 
-  .letter-button {
-    margin: 0.2rem; 
-    padding: 0.5rem 1rem;  
-    font-size: 1.2rem; 
-    background-color: #80dad4;  
-    color: white;  
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-   
-  .letter-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
+.word-display {
+  font-size: 2rem;
+  margin: 20px 0;
+}
 
-  .hidden {
-    display: none;
-  }
+.guessed-letters {
+  font-size: 1.5rem;
+  margin: 10px 0;
+}
+
+.guess-input {
+  margin: 20px 0;
+}
+
+.guess-input label {
+  font-size: 1.2rem;
+}
+
+.guess-input input {
+  font-size: 1.2rem;
+  padding: 5px;
+}
+
+.attempts-left {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.game-message {
+  font-size: 1.5rem;
+  margin: 20px 0;
+}
+
+.game-message p {
+  color: red;
+  font-weight: bold;
+}
+
+.letter-button {
+  margin: 0.2rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  background-color: #80dad4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.letter-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.hidden {
+  display: none;
+}
+
+.help-button {
+  margin: 20px 0;
+  padding: 0.5rem 1.5rem;
+  font-size: 1.2rem;
+  background-color: #ff9800; /* Naranja */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.help-button:hover {
+  background-color: #e68900; 
+}

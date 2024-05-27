@@ -9,7 +9,7 @@ import { Usuario } from '../../clases/usuario';
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule  , PaginaErrorComponent, NgIf],
+  imports: [FormsModule, ReactiveFormsModule  , PaginaErrorComponent, NgIf,FormsModule],
   templateUrl: './registro.component.html',
   styleUrl: './registro.component.css'
 })

@@ -1,10 +1,11 @@
 import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-mayor-menor',
   standalone: true,
-  imports: [NgIf],
+  imports: [NgIf,RouterModule],
   templateUrl: './mayor-menor.component.html',
   styleUrl: './mayor-menor.component.css'
 })
@@ -17,6 +18,7 @@ export class MayorMenorComponent implements OnInit{
   intentosRestantes: number = 3;
   juegoGanado: boolean = false;
   juegoPerdido: boolean = false;
+  puntos: number = 0;
 
   constructor() {}
 
@@ -30,20 +32,23 @@ export class MayorMenorComponent implements OnInit{
     this.juegoGanado = false;
     this.juegoPerdido = false;
     this.resultado = '';
-    this.generarCarta();
+    this.generarCarta(true);
   }
 
-  generarCarta() {
-    this.cartaAnterior = this.cartaActual;
-    this.cartaActual = Math.floor(Math.random() * 10);
+  generarCarta(isFirst: boolean = false) {
+    if (!isFirst) {
+      this.cartaAnterior = this.cartaActual;
+    }
+    this.cartaActual = Math.floor(Math.random() * 12) + 1;
   }
 
   verificarResultado(eleccion: string) {
-    this.generarCarta();
+    const cartaAnteriorTemp = this.cartaActual; // Guarda la carta actual antes de generar una nueva
+    this.generarCarta(); // Genera una nueva carta
 
     if (
-      (eleccion === 'mayor' && this.cartaActual > this.cartaAnterior) ||
-      (eleccion === 'menor' && this.cartaActual < this.cartaAnterior)
+      (eleccion === 'mayor' && this.cartaActual > cartaAnteriorTemp) ||
+      (eleccion === 'menor' && this.cartaActual < cartaAnteriorTemp)
     ) {
       this.resultado = 'Correcto';
       this.puntaje++;
@@ -51,6 +56,7 @@ export class MayorMenorComponent implements OnInit{
       if (this.puntaje === 5) {
         this.juegoGanado = true;
         this.resultado = 'Ganaste';
+        this.puntos += 10;
       }
     } else {
       this.resultado = 'Incorrecto';
@@ -65,8 +71,11 @@ export class MayorMenorComponent implements OnInit{
     if (this.juegoGanado || this.juegoPerdido) {
       setTimeout(() => {
         this.iniciarJuego();
-      }, 800);
+      }, 2000); 
     }
   }
 
+  getCartaImagen(carta: number): string {
+    return `../../../assets/imagenes/cartas/Carta${carta}.png`;
+  }
 }

@@ -1,43 +1,52 @@
-
-<div class="vistafondo"> 
-    <div class="juego2-container" >
-        <h1>Juego Mayor o Menor</h1>
-        
-        <div class="cartas">
-          <div class="carta-anterior">
-            <p>Carta Anterior: {{ cartaAnterior }}</p>
-          </div>
-          <div class="carta-actual">
-            <p>Carta Actual: {{ cartaActual }}</p>
-          </div>
-        </div>
-        
-        <div class="resultado">
-          <p>Resultado: {{ resultado }}</p>
-        </div>
-        
-        <div class="puntaje">
-          <p>Puntaje: {{ puntaje }}</p>
-        </div>
-        
-        <div class="intentos">
-          <p>Intentos Restantes: {{ intentosRestantes }}</p>
-        </div>
-        
-        <div class="opciones">
-          <button (click)="verificarResultado('mayor')">Mayor</button>
-          <button (click)="verificarResultado('menor')">Menor</button>
-        </div>
-        <div class="juego2-container">
-     
-            <div *ngIf="juegoGanado" class="mensaje-ganaste">
-              ¡Ganaste el juego!
-            </div>
-            
-            <div *ngIf="juegoPerdido" class="mensaje-perdiste">
-              ¡Perdiste el juego!
-            </div>
-          </div>
-        <button (click)="iniciarJuego()">Reiniciar Juego</button>
+<div>
+    
+    <button routerLink="/home" class="btn btn-primary">Volver</button>
+    </div><div class="vistafondo"> 
+  <div class="juego2-container">
+    <h1>Juego Mayor o Menor</h1>
+    
+    <div class="cartas">
+      <div class="carta-anterior">
+        <p>Carta Anterior: {{ cartaAnterior }}</p>
+        <img *ngIf="cartaAnterior" [src]="getCartaImagen(cartaAnterior)" alt="Carta Anterior">
+      </div>
+      <div class="carta-actual">
+        <p>Carta Actual: {{ cartaActual }}</p>
+        <img *ngIf="cartaActual" [src]="getCartaImagen(cartaActual)" alt="Carta Actual">
       </div>
     </div>
+    
+    <div class="resultado">
+      <p>Resultado: {{ resultado }}</p>
+    </div>
+    
+    <div class="puntaje">
+      <p>Puntaje: {{ puntaje }}</p>
+    </div>
+    
+    <div class="intentos">
+      <p>Intentos Restantes: {{ intentosRestantes }}</p>
+    </div>
+    
+    <div class="opciones">
+      <button (click)="verificarResultado('mayor')" [disabled]="juegoGanado || juegoPerdido">Mayor</button>
+      <button (click)="verificarResultado('menor')" [disabled]="juegoGanado || juegoPerdido">Menor</button>
+    </div>
+
+    <div *ngIf="juegoGanado" class="mensaje-ganaste">
+      ¡Ganaste el juego!
+    </div>
+    
+    <div *ngIf="juegoPerdido" class="mensaje-perdiste">
+      ¡Perdiste el juego!
+    </div>
+    <div>
+    <div> <br>
+      <button (click)="iniciarJuego()">Reiniciar Juego</button>
+    </div>
+  </div>
+  </div>
+  <div class="points-display">
+    Puntos: {{ puntos }}
+  </div>
+</div>
