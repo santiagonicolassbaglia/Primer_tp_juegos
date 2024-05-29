@@ -3,13 +3,13 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { PaginaErrorComponent } from '../pagina-error/pagina-error.component';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Usuario } from '../../clases/usuario';
 
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule  , PaginaErrorComponent, NgIf,FormsModule],
+  imports: [FormsModule, ReactiveFormsModule  , PaginaErrorComponent, NgIf,FormsModule,RouterLink],
   templateUrl: './registro.component.html',
   styleUrl: './registro.component.css'
 })

@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,UserCredential, GoogleAuthProvider, User} from 'firebase/auth'; // Modificado
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,UserCredential, GoogleAuthProvider, User} from 'firebase/auth'; 
 import { Usuario } from '../clases/usuario';
 import { Observable, of } from 'rxjs';
 import {AngularFireDatabase} from '@angular/fire/compat/database';
