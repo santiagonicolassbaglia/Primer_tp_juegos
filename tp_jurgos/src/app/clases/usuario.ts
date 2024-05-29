@@ -11,7 +11,5 @@ export class Usuario {
         this.nombre = nombre;
         this.code = code;
     }
-
-    
-    
+ 
 }
