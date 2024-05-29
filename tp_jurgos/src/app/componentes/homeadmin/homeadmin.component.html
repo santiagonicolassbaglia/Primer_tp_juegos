@@ -1,14 +1,26 @@
- 
-
 <div class="home-container">
     <div class="header">
-      <h1>Bienvenido {{nombreUsuario}}, a la Plataforma de Juegos Admin</h1>
-      <button (click)="cerrarSesion()" class="btn btn-logout">Cerrar sesión</button>
+      <h1>Administración de Usuarios</h1>
+      <button (click)="cerrarSesion()" class="btn-logout">Cerrar sesión</button>
     </div>
-   
-    <div>
-      <button routerLink="/home" class="btn btn-primary">Home</button>
+  
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Último inicio de sesión</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuarios$ | async">
+            <td>{{ usuario.nombre }}</td>
+            <td>{{ usuario.mail }}</td>
+            <td>{{ usuario.lastLogin | date: 'dd/MM/yyyy HH:mm' }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-   
   </div>
   

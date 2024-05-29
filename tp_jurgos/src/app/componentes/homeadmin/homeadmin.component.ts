@@ -2,36 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { Usuario } from '../../clases/usuario';
+import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-homeadmin',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule],
   templateUrl: './homeadmin.component.html',
-  styleUrl: './homeadmin.component.css'
+  styleUrls: ['./homeadmin.component.css']
 })
 export class HomeadminComponent implements OnInit {
-  nombreUsuario: string = '';
+  usuarios$: Observable<Usuario[]>;
+
   constructor(private router: Router, private auths: AuthService) { }
+
   ngOnInit(): void {
-
-    this.auths.usuarioActual().then((usuario: Usuario) => {
-      if (usuario) {
-        this.nombreUsuario = usuario.nombre;
-      } 
-    }).catch(error => {
-      console.error('Error al obtener el usuario actual:', error);
-    });
+    this.usuarios$ = this.auths.getAllUsers();
   }
 
-  logout() {
-    this.auths.logout();
-
-  }
-
-  esAdmin() {
-     this.auths.esAdmin = true;
-  }
   cerrarSesion() {
     this.auths.logout()
       .then(() => {
@@ -41,8 +30,11 @@ export class HomeadminComponent implements OnInit {
       .catch(error => {
         console.error('Error al cerrar sesión:', error);
       });
-  }
-  }
+
   
 
- 
+
+
+
+  }
+}

@@ -1,7 +1,7 @@
 <div class="chat-container">
   <div class="messages">
     <div *ngFor="let message of messages" class="message">
-      <strong>{{ message.user }} {{tiempo}}</strong>: {{ message.message }}
+      <strong>{{ message.user }} {{message.timestamp  | date: 'dd/MM/yyyy HH:mm' }}</strong>: {{ message.message }}
     </div>
   </div>
   <div class="input-container">

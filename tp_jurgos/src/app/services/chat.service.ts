@@ -7,7 +7,7 @@ export interface ChatMessage {
   id?: string;
   user: string;
   message: string;
-  timestamp: Date;
+  timestamp: any; // Cambiar a 'any' para manejar Timestamps de Firestore
 }
 
 @Injectable({
@@ -30,25 +30,33 @@ export class ChatService {
   }
   
   getMessages(): Observable<ChatMessage[]> {
-    return this.messagesCollection.valueChanges();
+    return this.messagesCollection.valueChanges().pipe(
+      map(messages => messages.map(msg => ({
+        ...msg,
+        timestamp: msg.timestamp ? msg.timestamp.toDate() : null
+      })))
+    );
   }
 
   sendMessage(user: string, message: string, timestamp: Date): Promise<void> {
     const id = this.firestore.createId();
-    return this.messagesCollection.doc(id).set({ id, user, message, timestamp });
+    return this.messagesCollection.doc(id).set({ id, user, message, timestamp: timestamp });
   }
 
   getNonEmptyUserNames(): Observable<string[]> {
     return this.firestore.collection<ChatMessage>('messages').valueChanges().pipe(
       map(messages => messages.filter(message => message.message.trim() !== '')),
       map(messages => messages.map(message => message.user)),
-      map(users => users.filter((user, index, users) => users.indexOf(user) === index)
-     
-    ));
-    
+      map(users => users.filter((user, index, users) => users.indexOf(user) === index))
+    );
   }
 
   getMessagesByUser(user: string): Observable<ChatMessage[]> {
-    return this.firestore.collection<ChatMessage>('messages', ref => ref.where('user', '==', user)).valueChanges();
+    return this.firestore.collection<ChatMessage>('messages', ref => ref.where('user', '==', user)).valueChanges().pipe(
+      map(messages => messages.map(msg => ({
+        ...msg,
+        timestamp: msg.timestamp ? msg.timestamp.toDate() : null
+      })))
+    );
   }
 }
